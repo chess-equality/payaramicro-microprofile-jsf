@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <style type="text/css">
+    .ui-datalist {
+      width:300px;
+      margin-bottom: 20px;
+    }
+    .ui-datalist-item {
+      padding:3px;
+    }
+  </style>
+</h:head>
+<h:body>
+  <h:form id="form">
+    <p:dataList value="#{dataListView.cars1}" var="car" type="ordered">
+      <f:facet name="header">
+        Basic
+      </f:facet>
+      #{car.brand}, #{car.year}
+    </p:dataList>
+
+    <p:dataList value="#{dataListView.cars2}" var="car" type="definition">
+      <f:facet name="header">
+        Definition
+      </f:facet>
+      Brand: #{car.brand}, Year: #{car.year}
+      <!--
+      <f:facet name="description">
+        <p:graphicImage name="demo/images/car/#{car.brand}.gif"/>
+      </f:facet>
+      -->
+    </p:dataList>
+  </h:form>
+</h:body>
+</html>
