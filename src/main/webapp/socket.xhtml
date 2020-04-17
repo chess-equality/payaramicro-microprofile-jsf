@@ -48,13 +48,13 @@
         </p>
     </h:form>
 
-    <!--
-    <script type="javascript">
-        function updateCounter(newValue) {
-            alert('In updateCounter!');
-            $("#count").text(newValue);
+    <script type="text/javascript">
+        function updateCounter(message, channel, event) {
+            alert("In updateCounter! message = " + message + ", channel = " + channel + ", event " + event);
+            /* $("#count").text(message); */
+            document.getElementById('count').innerHTML = message;
         }
-        function onclosePush(code) {
+        function onClosePush(code) {
             if (code === -1) {
                 alert("Oops! Your browser doesn't seem to support web sockets. The push functionality won't work.");
             }
@@ -63,20 +63,8 @@
             }
         }
     </script>
-    -->
 
-    <o:socket channel="counter"
-              onmessage="function updateCounter(newValue) {
-                document.getElementById('count').innerHTML = newValue;
-              }"
-              onclose="function onclosePush(code) {
-                 if (code === -1) {
-                    alert('Oops! Your browser doesn\'t seem to support web sockets. The push functionality won\'t work.');
-                } else if (code !== 1000) {
-                    alert('Oops! Push has stopped working with error code ' + code + '! Reload the page.');
-                }
-              }"
-              connected="#{pushBean.connected}" />
+    <o:socket channel="counter" onmessage="updateCounter" onclose="onClosePush" connected="#{pushBean.connected}" />
 
 </h:body>
 
