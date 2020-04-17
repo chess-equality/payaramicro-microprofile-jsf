@@ -17,6 +17,8 @@ import java.util.List;
 @SessionScoped
 public class DataListView implements Serializable {
 
+    private static final long serialVersionUID = 1445286340221573490L;
+
     private List<Car> cars1;
     private List<Car> cars2;
     private List<Car> cars3;

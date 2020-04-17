@@ -10,8 +10,18 @@
 
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+
+  <context-param>
+    <param-name>org.omnifaces.SOCKET_ENDPOINT_ENABLED</param-name>
+    <param-value>true</param-value>
+  </context-param>
 
   <welcome-file-list>
     <welcome-file>index.xhtml</welcome-file>

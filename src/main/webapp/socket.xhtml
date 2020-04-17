@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"
+>
+
+<h:head>
+    <title>Global counter</title>
+</h:head>
+
+<h:body>
+    <h3>Global counter</h3>
+    <p>
+        Below is a static counter which has the same value application wide.
+    </p>
+
+    <h1><h:panelGroup id="count">#{pushBean.count}</h:panelGroup></h1>
+
+    <h:form>
+        <p>
+            If you enable the push, then a websocket will be opened.
+            Note that it's by default always auto-connected when included in the page, but for demo purposes we're initially disabling it.
+        </p>
+        <p>
+            <h:panelGroup id="toggle">
+                Push is #{pushBean.connected ? 'connected' : 'disconnected'}
+                <h:commandButton value="#{pushBean.connected ? 'disconnect' : 'connect'} it" action="#{pushBean.toggle}">
+                    <f:ajax render="toggle increment :count"/>
+                </h:commandButton>
+            </h:panelGroup>
+        </p>
+        <p>
+            If push is connected and you press the "increment!" button, then the static counter will increment in bean and the push will send out the new value to the same channel in all connected clients.
+            To see it yourself, open the same page in multiple tabs/windows/browsers/machines and trigger the push in only one of it.
+            Note that the counter also won't increment from other side if push is still disconnected on current page.
+        </p>
+        <p>
+            <h:commandButton id="increment" value="increment!" action="#{pushBean.increment}" disabled="#{not pushBean.connected}">
+                <f:ajax />
+            </h:commandButton>
+        </p>
+    </h:form>
+
+    <!--
+    <script type="javascript">
+        function updateCounter(newValue) {
+            alert('In updateCounter!');
+            $("#count").text(newValue);
+        }
+        function onclosePush(code) {
+            if (code === -1) {
+                alert("Oops! Your browser doesn't seem to support web sockets. The push functionality won't work.");
+            }
+            else if (code !== 1000) {
+                alert("Oops! Push has stopped working with error code " + code + "! Reload the page.");
+            }
+        }
+    </script>
+    -->
+
+    <o:socket channel="counter"
+              onmessage="function updateCounter(newValue) {
+                document.getElementById('count').innerHTML = newValue;
+              }"
+              onclose="function onclosePush(code) {
+                 if (code === -1) {
+                    alert('Oops! Your browser doesn\'t seem to support web sockets. The push functionality won\'t work.');
+                } else if (code !== 1000) {
+                    alert('Oops! Push has stopped working with error code ' + code + '! Reload the page.');
+                }
+              }"
+              connected="#{pushBean.connected}" />
+
+</h:body>
+
+</html>
