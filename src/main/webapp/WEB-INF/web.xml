@@ -23,7 +23,12 @@
     <param-value>true</param-value>
   </context-param>
 
+  <context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>nova-light</param-value>
+  </context-param>
+
   <welcome-file-list>
-    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 </web-app>

@@ -18,7 +18,16 @@
     <log4j2.version>2.13.1</log4j2.version>
     <final.name>payaramicro-microprofile-jsf</final.name>
   </properties>
-  
+
+  <repositories>
+    <repository>
+      <id>prime-repo</id>
+      <name>PrimeFaces Maven Repository</name>
+      <url>http://repository.primefaces.org</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>org.eclipse.microprofile</groupId>
@@ -56,6 +65,13 @@
       <groupId>org.primefaces</groupId>
       <artifactId>primefaces</artifactId>
       <version>8.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.primefaces.themes/all-themes -->
+    <dependency>
+      <groupId>org.primefaces.themes</groupId>
+      <artifactId>all-themes</artifactId>
+      <version>1.0.10</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.omnifaces/omnifaces -->
@@ -98,6 +114,13 @@
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
       <version>${log4j2.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>1.0.2</version>
     </dependency>
 
   </dependencies>
